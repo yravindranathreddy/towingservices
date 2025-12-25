@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Srikanth Towing Services</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      font-size: xx-large;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      z-index: 1000;
+      padding: 10px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+    
+    header img {
+      height: 50px;
+    }
+    /* hide hamburger by default; shown in mobile media query */
+    /* #hamburger { display: none; align-items: center; gap: 6px; }
+    /* Bars for hamburger */
+    /* #hamburger .bar { width: 28px; height: 3px; background: #fff; border-radius: 2px; display: block; } */ */
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 60px 20px;
+    }
+    /* Hero slider container (replaces single-background hero) */
+    #home {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #111; /* fallback color while images load */
+    }
+
+    /* Slider structure */
+    .slider {
+      position: absolute;
+      inset: 0; /* fill #home */
+      width: 100%;
+      height: 100%;
+    }
+    .slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    /* Each slide uses a background so sizing matches previous single-background behavior */
+    .slides .slide {
+      position: absolute;
+      inset: 0;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover; /* match previous H1.webp behavior on desktop */
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      will-change: opacity;
+    }
+    .slides .slide.active {
+      opacity: 1;
+    }
+    /* overlay content area (keeps banner above slider) */
+    #home .content {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      max-width: 1100px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #home h1 {
+      font-size: 3rem;
+    }
+    #solutions img, #about img, #contact img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    
+     
+    #contact {
+      background-color: #dae1d3;
+      color: #141414;
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    #solutions, #about, #services, #contact {
+      max-width: 1100px;
+      margin: auto;
+    }
+    #services ul {
+      list-style: none;
+      padding: 0;
+    }
+    #services ul li {
+      margin: 15px 0;
+      font-size: 1.1rem;
+    }
+    .services ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .services li {
+      background: #e8f5e9;
+      padding: 20px;
+      border-left: 5px solid #e1b255;
+      border-radius: 5px;
+      /* box-shadow: 0 2px 6px rgba(0,0,0,0.1); */
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px 10px;
+    }
+    #home div {
+    /* position: relative; */
+    /* z-index: 2; */
+    /* padding: 20px; */
+    /* background: rgba(27, 25, 25, 0.877);
+    border-radius: 10px; */
+}
+   
+.bshadoew{
+  box-shadow: "0px 1px 4px 3px forestgreen";
+}
+
+/* Hamburger & responsive menu */@media screen and (max-width:768px){
+  #hamburger {
+    display: flex; /* make it visible */
+  }
+  nav {
+    position: absolute;
+    top: 70px; /* just below header */
+    right: 20px;
+    background: rgba(0,0,0,0.9);
+    border-radius: 8px;
+    width: 200px;
+    display: none; /* hidden by default */
+    flex-direction: column;
+    padding: 10px;
+  }
+  nav.show {
+    display: flex;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  nav ul li {
+    display: block;
+  }
+}
+
+/* Top banner below fixed navbar - non-sticky (not fixed) */
+/* Top banner below fixed navbar - non-sticky (not fixed) */
+#top-banner {
+  position: relative; /* not fixed: it will stay in normal flow */
+  margin-top: 70px; /* push the banner below the fixed header */
+  left: 0;
+  width: 100%;
+  background: transparent;
+  color: red;
+  padding: 4px 12px; /* reduced padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px; /* reduced gap between heading and marquee */
+  text-align: center;
+}
+/* Ensure color applied to heading and marquee text and remove margins from common headings */
+#top-banner h1, #top-banner h2, #top-banner h3, #top-banner h4, #top-banner h5, #top-banner .marquee-inner {
+  color: #e1b255;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0px 2px 5px 2px ;
+}
+#top-banner .phones {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: red;
+}
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee .marquee-inner {
+  display: inline-block;
+  padding-left: 100%; /* start off-screen to the right */
+  animation: marquee 24s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0%); }
+  to { transform: translateX(-100%); }
+}
+
+/* Floating WhatsApp FAB with pulsing/blink effect to attract attention */
+.whatsapp-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366; /* WhatsApp green */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(37,211,102,0.3);
+  z-index: 1200;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  animation: whatsapp-pulse 1.6s infinite;
+}
+.whatsapp-fab svg { width: 28px; height: 28px; display:block; }
+@keyframes whatsapp-pulse {
+  0% { transform: scale(1); box-shadow: 0 6px 18px rgba(37,211,102,0.25); }
+  50% { transform: scale(1.08); box-shadow: 0 12px 36px rgba(37,211,102,0.12); }
+  100% { transform: scale(1); box-shadow: 0 6px 18px rgba(37,211,102,0.25); }
+}
+
+/* Reduce size slightly on small screens */
+@media (max-width: 480px) {
+  .whatsapp-fab { width:48px; height:48px; right:25px; bottom:35px; }
+  .whatsapp-fab svg { width:24px; height:24px; }
+}
+
+/* Mobile tweak: keep focal area visible on small screens */
+@media screen and (max-width: 768px) {
+  #home {
+    /* On narrow screens scale the image so the whole image fits horizontally/vertically */
+    background-position: center top; /* align top so image fits into view */
+    background-size: contain; /* show the entire image (may letterbox) */
+    background-repeat: no-repeat;
+    height: auto; /* allow the container to size to the image */
+    min-height: 40vh;
+    padding: 0; /* remove extra vertical padding to reduce gap */
+    margin-bottom: 0;
+  }
+  /* ensure banner spacing remains appropriate on small screens */
+  #top-banner {
+    margin-top: 70px;
+    padding: 6px 8px;
+  }
+
+  /* Reduce vertical padding for sections on mobile so About sits closer to hero */
+  section {
+    padding: 20px 12px;
+  }
+  /* If you want About specifically tighter, reduce its top padding */
+  #about {
+    padding-top: 12px;
+  }
+  /* Make slider backgrounds behave like the old H1.webp on mobile: show whole image */
+  .slides .slide {
+    background-size: contain;
+    background-position: center 25%;
+  }
+}
+  </style>
+</head>
+
+<body>
+  <header id="header" style="display:flex;align-items:center;justify-content:space-between;padding:10px 40px;background:rgba(63,63,63);position:fixed;width:100%;z-index:1000;">
+  <img src="RS Logo.png" alt="Root Square Logo" style="height:50px;">
+  
+  
+  <!-- Hamburger Icon -->
+  <div id="hamburger" style="flex-direction:row;cursor:pointer;gap:5px;">
+    <div style="width:30px;height:3px;background:#fff;border-radius:2px;"></div>
+    <div style="width:30px;height:3px;background:#fff;border-radius:2px;"></div>
+    <div style="width:30px;height:3px;background:#fff;border-radius:2px;"></div>
+  </div>
+
+  <nav>
+    <ul style="display:flex;gap:20px;list-style:none;margin:0;padding:0;margin-right: 75px;font-size: large;">
+      <li><a href="#home" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a></li>
+      <li><a href="#about" style="color:#fff;text-decoration:none;font-weight:bold;">About Us</a></li>
+      <li><a href="#services" style="color:#fff;text-decoration:none;font-weight:bold;">Services</a></li>
+      <li><a href="#contact" style="color:#fff;text-decoration:none;font-weight:bold;">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <!-- Top banner placed below the fixed navbar: red heading + scrolling line -->
+  <div id="top-banner">
+    <h5>Srikanth Towing Services</h5>
+    <p class="phones">9848729488,9959338323</p>
+    <div class="marquee"><div class="marquee-inner" style="font-size: large;">Reliable and efficient towing services for all your needs. Please contact us for more details on <a style="color: red;">"9848729488,9959338323".</a></div></div>
+  </div>
+
+  <section id="home">
+    <div class="slider" aria-hidden="false">
+      <div class="slides">
+          <div class="slide active" style="background-image:url('H1.webp');" aria-label="slide 1"></div>
+          <div class="slide" style="background-image:url('tw1.webp');" aria-label="slide 2"></div>
+          <div class="slide" style="background-image:url('tw2.webp');" aria-label="slide 2"></div>
+          <div class="slide" style="background-image:url('tw3.webp');" aria-label="slide 3"></div>
+          <div class="slide" style="background-image:url('tw4.webp');" aria-label="slide 4"></div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Keep the top-banner content overlay visible above slider -->
+      <!-- (The banner itself is outside #home and remains fixed in normal flow) -->
+    </div>
+  </section>
+
+ 
+<section id="about">
+  <h2>About Us</h2>
+  <p>At <strong>Srikanth Towing Services</strong>, we live by our philosophy — fast response, honest pricing, and safe handling of your vehicle. Our team is available 24/7 to assist with breakdowns, accident recovery, and long-distance towing.</p>
+  <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216" alt="Teamwork">
+</section>
+
+
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li class="bshadoew" style="box-shadow: 0px 0px 8px 4px #e1b255;"><h2>Four Wheeler Towing</h2>We provide reliable and efficient towing services for all types of four-wheel vehicles. Our team is equipped to handle any towing situation with professionalism and care.</li>
+      <li class="bshadoew" style="box-shadow: 0px 0px 8px 4px #e1b255;"><h2>Flat Wheel Towing</h2>We specialize in flat wheel towing services, ensuring that your vehicle is safely transported without further damage. Our experts are trained to handle all types of flat tire situations.</li>
+      <li class="bshadoew" style="box-shadow: 0px 0px 8px 4px #e1b255;"><h2>Battery Jump Start</h2>Our battery jump start service is quick and efficient, ensuring that you’re back on the road in no time. We use advanced equipment to safely jump-start your vehicle without causing any damage.</li>
+        </ul>
+    <!-- <img src="https://images.unsplash.com/photo-1526378722370-6f3c0e894de3" alt="Services Image"> -->
+  </section>
+
+
+  <section id="contact" class="contact" style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;">
+  <!-- Left Side -->
+  <div style="flex:1;min-width:280px;">
+    <h2>Contact Us</h2>
+    <p>We would love to provide services to you in-time smoothly & friendly!</p>
+    <p><strong>Address:</strong>Mekala Complex 2, Main road, Hyderabad - Warangal - Bhopalpatnam Hwy, near junction, Uppal, Hyderabad, Telangana 500039</p>
+    <p><strong>Phone:</strong> <b>9848729488</b></p>
+    <p>Click here to chat:
+      <a id="wa-link"
+         href="whatsapp://send?phone=919848729488"
+         onclick="(function(){
+           var appLink = 'whatsapp://send?phone=919848729488';
+           var webLink = 'https://wa.me/919848729488';
+           // Try to open the WhatsApp app first, then fallback to web if not handled
+           window.location = appLink;
+           setTimeout(function(){ window.open(webLink, '_blank'); }, 700);
+           return false;
+         })()"
+         style="display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;">
+        <!-- Inline WhatsApp icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" aria-hidden="true" style="flex:0 0 auto;">
+          <path fill="#25D366" d="M20.52 3.48A11.865 11.865 0 0012 .5 11.92 11.92 0 00.5 12c0 2.1.55 4.07 1.6 5.84L.5 23.5l5.86-1.55A11.92 11.92 0 0012 23.5c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.02zM12 21.5a9.4 9.4 0 01-4.8-1.3l-.34-.2-3.48.92.95-3.39-.22-.35A9.31 9.31 0 012.7 12 9.5 9.5 0 1112 21.5z"/>
+          <path fill="#fff" d="M17.6 14.2c-.3-.15-1.78-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.78.98-.96 1.18-.18.2-.36.22-.66.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.33.45-.5.15-.17.2-.28.3-.47.1-.2 0-.37-.05-.52-.05-.15-.67-1.6-.92-2.2-.24-.6-.5-.52-.67-.53l-.57-.01c-.19 0-.5.07-.76.37-.27.3-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.02.15.2 2.05 3.2 4.97 4.49 2.08.9 2.94.95 4 .79 1.08-.16 3.35-1.36 3.82-2.68.47-1.33.47-2.47.33-2.7-.13-.24-.47-.37-.98-.62z"/>
+        </svg>
+        <span style="font-weight:700;"></span>
+      </a>
+    </p></svg>
+    <!-- <p><strong>Email:</strong> <b>rootsqaresinfo@gmail.com</b></p> -->
+  </div>
+
+  <!-- Right Side -->
+  <div style="flex:1;min-width:280px;background:#f9f9f9;padding:20px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+    <h3>Get in Touch</h3>
+    <form id="contactForm">
+      <label for="name">Name</label><br>
+      <input type="text" id="name" name="name" required style="width:100%;padding:8px;margin-bottom:12px;font-size: large;"><br>
+
+      <label for="mobile">Mobile Number</label><br>
+      <input type="text" id="mobile" name="mobile" required style="width:100%;padding:8px;margin-bottom:12px;font-size: large;"><br>
+
+      <label for="message">Message</label><br>
+      <textarea id="message" name="message" rows="4" required style="width:100%;padding:8px;margin-bottom:12px;font-size: large;"></textarea><br>
+
+      <button type="submit" style="background:#007bff;color:#fff;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;font-size: smaller;">
+        Send via WhatsApp
+      </button>
+    </form>
+  </div>
+</section>
+
+  <footer>
+    <p>&copy; 2025 SRIKANTH TOWING SERVICES. All rights reserved.</p>
+  </footer>
+
+  <!-- Floating WhatsApp action button (pulsing) -->
+  <a class="whatsapp-fab" href="https://wa.me/918143575784" target="_blank" aria-label="Chat on WhatsApp">
+    <!-- WhatsApp SVG (white icon on green circle) -->
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path fill="#ffffff" d="M16.041 3C9.373 3 3.999 8.374 3.999 15.042c0 2.655.87 5.107 2.352 7.118L4 29l6.018-2.28c1.857 1.02 3.993 1.563 6.023 1.563 6.667 0 12.041-5.374 12.041-12.041S22.708 3 16.041 3zm0 21.5c-1.805 0-3.566-.45-5.106-1.31l-.365-.205-3.576 1.356 1.353-3.485-.23-.373C7.1 18.01 6.7 16.55 6.7 15.042 6.7 10.02 10.999 5.72 16.041 5.72S25.381 10.02 25.381 15.042 21.083 24.5 16.041 24.5z"/>
+      <path fill="#ffffff" d="M22.3 19.1c-.3-.15-1.77-.87-2.05-.97-.28-.1-.49-.15-.69.15-.2.3-.79.97-.97 1.17-.18.2-.36.22-.66.07-.3-.15-1.26-.47-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.36.45-.54.15-.18.2-.3.3-.5.1-.2 0-.37-.05-.52-.06-.15-.69-1.66-.95-2.27-.25-.6-.5-.52-.69-.53l-.59-.01c-.2 0-.52.07-.79.37-.27.3-1.03 1.01-1.03 2.46 0 1.44 1.06 2.84 1.21 3.04.15.2 2.09 3.35 5.06 4.69 2.97 1.34 2.97.9 3.51.84.54-.06 1.77-.72 2.02-1.41.25-.69.25-1.28.18-1.41-.06-.13-.25-.2-.55-.35z"/>
+    </svg>
+  </a>
+
+  <script>
+    /* Simple slider: auto-play and pause-on-hover */
+    (function(){
+  const slides = document.querySelectorAll('.slides .slide');
+      let current = 0;
+      let interval = null;
+      function show(index){
+  slides.forEach((el,i)=> el.classList.toggle('active', i===index));
+      }
+      function next(){
+        current = (current + 1) % slides.length;
+        show(current);
+      }
+      function start(){ interval = setInterval(next, 4000); }
+      function stop(){ clearInterval(interval); interval = null; }
+      // start when DOM ready (script placed at bottom so images exist)
+      if(slides.length>0){
+        start();
+        const sliderEl = document.querySelector('.slider');
+        sliderEl.addEventListener('mouseenter', stop);
+        sliderEl.addEventListener('mouseleave', start);
+        // make images responsive on orientation change
+        window.addEventListener('orientationchange', () => { show(current); });
+      }
+    })();
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if(window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let mobile = document.getElementById("mobile").value;
+    let message = document.getElementById("message").value;
+
+    let whatsappNumber = "919848729488"; // without +
+    let whatsappURL = `https://wa.me/${whatsappNumber}?text=Hello,%20I%20am%20${encodeURIComponent(name)}.%0AMobile:%20${encodeURIComponent(mobile)}%0AMessage:%20${encodeURIComponent(message)}`;
+
+    window.open(whatsappURL, "_blank");
+  });
+
+  const hamburger = document.getElementById("hamburger");
+const nav = document.querySelector("header nav");
+
+hamburger.addEventListener("click", () => {
+  nav.classList.toggle("show");
+});
+
+  </script>
+</body>
+</html>
